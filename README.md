@@ -24,12 +24,17 @@ git clone https://github.com/JoaoBarroso4/auth_api.git
 ```bash
 npm install
 ```
+3. Configure the environment variables `DATABASE_URL`, `JWT_SECRET_KEY` and `TOKEN_EXPIRY`
 
-3. Run the development server
+4. Run docker compose
+```bash
+docker-compose up -d
+```
+
+5. Run the development server
 ```bash
 npm run dev
 ```
-
 The server will start running at http://localhost:3000
 
 ## API Endpoints
