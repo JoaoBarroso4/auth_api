@@ -2,7 +2,7 @@ import { hash } from "bcrypt";
 import { prisma } from "../config/db";
 import { User, UserSchema } from "../validators/userValidator";
 
-export async function createUser(user: Partial<User>) {
+export async function createUser(user: User) {
   if (!user.email || !user.username || !user.password) {
     throw new Error("Email, username, and password are required.");
   }
@@ -41,7 +41,7 @@ export function getUserByUsername(username: string) {
   });
 }
 
-export function updateUser(id: string, data: Partial<User>) {
+export function updateUser(id: string, data: User) {
   return prisma.user.update({
     where: { id },
     data,

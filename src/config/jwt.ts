@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "../validators/userValidator";
+import { UserBD } from "../validators/userValidator";
 
 if (!process.env.JWT_SECRET_KEY) {
   throw new Error("JWT_SECRET_KEY must be set.");
@@ -8,7 +8,7 @@ if (!process.env.JWT_SECRET_KEY) {
 const secret = process.env.JWT_SECRET_KEY;
 const tokenExpiry = process.env.TOKEN_EXPIRY || "1h";
 
-export function generateToken(user: User) {
+export function generateToken(user: UserBD) {
   return jwt.sign(
     {
       id: user.id,
