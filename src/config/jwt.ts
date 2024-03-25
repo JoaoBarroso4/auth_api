@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 import jwt from "jsonwebtoken";
 import { UserBD } from "../validators/userValidator";
 
@@ -21,6 +23,7 @@ export function generateToken(user: UserBD) {
 
 export function verifyToken(token: string) {
   try {
+    token = token.replace("Bearer ", "");
     return jwt.verify(token, secret);
   } catch (error) {
     throw new Error("Invalid or expired token.");

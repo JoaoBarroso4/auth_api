@@ -1,23 +1,24 @@
 import { hash } from "bcrypt";
 import { prisma } from "../config/db";
 import { User, UserSchema } from "../validators/userValidator";
+import { MissingFieldError } from "../errors/missingFieldError";
+import { ValidationError } from "../errors/validationError";
 
 export async function createUser(user: User) {
   if (!user.email || !user.username || !user.password) {
-    throw new Error("Email, username, and password are required.");
+    throw new MissingFieldError("Email, username, and password are required.");
   }
 
   const validationResult = UserSchema.safeParse(user);
   if (!validationResult.success) {
-    throw new Error("Invalid user data.");
+    throw new ValidationError("Invalid user data.");
   }
 
   const hashedPassword = await hash(user.password!, 10);
 
   return prisma.user.create({
     data: {
-      email: user.email,
-      username: user.username,
+      ...user,
       password: hashedPassword,
     },
   });
@@ -41,7 +42,7 @@ export function getUserByUsername(username: string) {
   });
 }
 
-export function updateUser(id: string, data: User) {
+export function updateUser(id: string, data: Partial<User>) {
   return prisma.user.update({
     where: { id },
     data,

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/http/server.ts"
+    "dev": "tsx watch src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@prisma/client": "^5.11.0",
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "jsonwebtoken": "^9.0.2",
     "zod": "^3.22.4"
